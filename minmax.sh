@@ -26,7 +26,7 @@ min() {
 max() {
     winclass="$(cut -d, -f 1 $LOG | dmenu -i)"
     [ -z "$winclass" ] && exit 1
-    winid="$(grep -E "^$winclass,[0-9]+$" $LOG | cut -d, -f 2)"
+    winid="$(grep -E "^$winclass,[0-9]+$" $LOG | cut -d, -f 2 | tail -n 1)"
     xdotool windowmap "$winid" && sed -i "/$winclass,$winid/d" $LOG
 }
 
